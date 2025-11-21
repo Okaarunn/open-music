@@ -1,0 +1,31 @@
+{
+  "name": "openmusicv1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run \"./src/test/Open Music API V1 Test.postman_collection.json\" --environment \"./src/test/OpenMusic API Test.postman_environment.json\"",
+    "lint": "eslint .",
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js",
+    "migrate": "node-pg-migrate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@hapi/hapi": "^21.4.3",
+    "auto-bind": "^5.0.1",
+    "dotenv": "^17.2.3",
+    "joi": "^18.0.1",
+    "nanoid": "^3.3.11",
+    "node-pg-migrate": "^8.0.3",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0",
+    "nodemon": "^3.1.10"
+  }
+}
