@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "newman run \"./src/test/Open Music API V1 Test.postman_collection.json\" --environment \"./src/test/OpenMusic API Test.postman_environment.json\"",
+    "test": "newman run \"./src/test/Open Music API V2 Test.postman_collection.json\" --environment \"./src/test/OpenMusic API Test.postman_environment.json\"",
     "lint": "eslint .",
     "start": "node ./src/server.js",
     "dev": "nodemon ./src/server.js",
@@ -15,7 +15,9 @@
   "description": "",
   "dependencies": {
     "@hapi/hapi": "^21.4.3",
+    "@hapi/jwt": "^3.2.1",
     "auto-bind": "^5.0.1",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "joi": "^18.0.1",
     "nanoid": "^3.3.11",

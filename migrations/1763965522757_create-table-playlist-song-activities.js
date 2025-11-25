@@ -1,22 +1,31 @@
 exports.up = (pgm) => {
-  pgm.createTable("users", {
+  pgm.createTable("playlist_song_activities", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
 
-    username: {
+    playlist_id: {
       type: "VARCHAR(50)",
-      unique: true,
       notNull: true,
     },
 
-    password: {
+    song_id: {
+      type: "VARCHAR(50)",
+      notNull: true,
+    },
+
+    user_id: {
+      type: "VARCHAR(50)",
+      notNull: true,
+    },
+
+    action: {
       type: "TEXT",
       notNull: true,
     },
 
-    fullname: {
+    time: {
       type: "TEXT",
       notNull: true,
     },
@@ -24,5 +33,5 @@ exports.up = (pgm) => {
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable("users");
+  pgm.dropTable("playlist_song_activities");
 };

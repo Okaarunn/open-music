@@ -24,9 +24,12 @@ class AlbumsHandler {
     const { id } = request.params;
     const album = await this._service.getAlbumById(id);
 
-    // fetch songs for this album from SongsService (if provided)
+    // fetch songs for this album from SongsService
     let songs = [];
-    if (this._songsService && typeof this._songsService.getSongsByAlbumId === 'function') {
+    if (
+      this._songsService &&
+      typeof this._songsService.getSongsByAlbumId === "function"
+    ) {
       songs = await this._songsService.getSongsByAlbumId(id);
     }
 
