@@ -50,6 +50,13 @@ class AlbumsService {
     // include songs array in album detail
     album.songs = songsResult.rows || [];
 
+    // include coverUrl constructed from cover file name if present
+    // if no cover field stored in DB, set coverUrl to null
+    const coverFilename = album.cover || null;
+    album.coverUrl = coverFilename
+      ? `http://${process.env.HOST}:${process.env.PORT}/upload/images/${coverFilename}`
+      : null;
+
     return album;
   }
 
@@ -57,7 +64,7 @@ class AlbumsService {
   async addAlbum({ name, year }) {
     const id = "albums-" + nanoid(16);
     const query = {
-      text: "INSERT INTO albums VALUES ($1, $2, $3) RETURNING id",
+      text: "INSERT INTO albums (id, name, year) VALUES ($1, $2, $3) RETURNING id",
       values: [id, name, year],
     };
 
@@ -79,6 +86,22 @@ class AlbumsService {
 
     if (!result.rows.length) {
       throw new NotFoundError("Gagal memperbarui album. Id tidak ditemukan");
+    }
+
+    return result.rows[0].id;
+  }
+
+  async editAlbumCover(id, coverFilename) {
+    const query = {
+      text: "UPDATE albums SET cover = $1 WHERE id = $2 RETURNING id",
+      values: [coverFilename, id],
+    };
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError(
+        "Gagal memperbarui cover album. Id tidak ditemukan"
+      );
     }
 
     return result.rows[0].id;
